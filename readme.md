@@ -60,4 +60,7 @@ Install python on the system
 
  - [Ingressive for good](https://ingressive.org/)
  - [Zuri team](https://zuri.team/)
- Thanks for putting the zuri training together.
+
+
+
+Thanks for putting the zuri training together.
