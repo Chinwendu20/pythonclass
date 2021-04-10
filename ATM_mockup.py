@@ -27,29 +27,34 @@ User_password_database={
 }
 
 trial=3
-deposit=0
-withdrawal=0
+
+#Obtaining the currrent date
 date_and_time=datetime.now()
 date_formatted=date_and_time.strftime("%d-%m-%Y")
 time_formatted=date_and_time.strftime("%H:%M")
 
+
+#A function for invalid options
 def invalid_option(func):
 
 		print('You have not selected a valid option')
 		print('These are the available options')
 		func()
 
+
+#Function for exiting the program
 def exit_func():
-		print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+		print('x'*20)
 		print('Goodbye')
 		exit()
 
 	 
 
-
+#The main function that sets the pace for
+#the program.
 def init():
 
-	print('+++++++++++++++++++++++++++++++')
+	print('+'*20)
 	print('Welcome to Bank Python')
 	print('Press')
 	print('1, To login if you have account already')
@@ -67,23 +72,26 @@ def init():
 		print()
 		print()
 		print('You need to have an account to give a feedback')
-		print('Select register')
+		print('Select register or login if you have an account already')
 		init()
 	else:
 		invalid_option(init)
 
+#Function for inputting first name
 def first_name():
 
 	first1=input('First name: \n')
 	first=validate_name(first1)
 	return first1
 
+#Function for inputing Last name
 def last_name():
 	last1=input('Last name: \n')
 	last=validate_name(last1)
 	return last1
 
 
+#Function for inputting password
 def password_func():
 
 	password=input('Password: \n')
@@ -91,18 +99,21 @@ def password_func():
 	validate_password(password, password1)
 	return password
 
+#Function for inputting emails
 def email_func():
 
 	email=input('Email: \n')
 	validate_email(email)
 	return email
 
+#Function for validating name input
 def validate_name(name):
 
 	if not re.match(r'^[A-Za-z]+$', name):
 		print('Invalid name')
 		first_name()
 
+#Function for validating password
 def validate_password(password, password1):
 
 	
@@ -111,6 +122,7 @@ def validate_password(password, password1):
 		print('Password does not match')
 		password_func()
 
+#Function for validating email
 def validate_email(email):
 
 	if not re.match(r'^[a-z-]+@[a-z]+.com$', email):
@@ -134,7 +146,7 @@ def validate_email(email):
 					invalid_option(validate_email(email))
 					
 		
-
+#Function that presents option after registration
 def option_after_registration():
 
 	print('Deposit into account now')
@@ -142,7 +154,7 @@ def option_after_registration():
 	print('2, Maybe later')
 	option=int(input('Please select an option: \n'))
 	if option ==1:
-		print('---------------------------------------------------------')
+		print('-'*20)
 		cash_deposit()
 	elif option == 2:
 		exit()
@@ -150,10 +162,11 @@ def option_after_registration():
 		invalid_option(option_after_registration)
 
 
-
+#Function that generates password and adds user
+#to database 
 def register():
 
-	print('o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o')
+	print('o-o'*20)
 	global account_number
 	account_number=str(random.randint(11111111,9999999999)).zfill(10)
 	User_password_database[account_number]=[first_name(), last_name(), email_func(), password_func(), 0]
@@ -166,7 +179,7 @@ def register():
 
 	
 		
-
+#Function that presents option when email is incorrect
 def incorrect_email():
 
 				
@@ -183,7 +196,9 @@ def incorrect_email():
 				else:
 					invalid_option(incorrect_email)
 				
-					
+
+
+#Function to find email in database(dictionary)					
 def input_email(message):
 
 		
@@ -198,7 +213,8 @@ def input_email(message):
 				incorrect_email()					
 
 	
-
+#Logic for function after incorrect password/password help
+#Using selected option from 'else_options_invalid_password' function
 def incorrect_password(option):
 	if option == 1:
 		global message1
@@ -213,6 +229,10 @@ def incorrect_password(option):
 	else:
 		print(else_options_invalid_password)
 
+
+
+#Logic for function after incorrect account number/account number using options
+#from 'options_account_number' function
 def no_record_for_account_number(option):
 
 	if option == 1:
@@ -234,16 +254,17 @@ def no_record_for_account_number(option):
 	else:
 		invalid_option(options_account_number())
 
-	
+#options after incorrect account number/Account number help	
 def options_account_number():
 
 			
 			print('Forgot account number? to retrieve, press 1')
 			print('Register, to get an account number, press 2')
 			print('To exit, press 3')
-			option=int(input('Input Email now: \n'))
+			option=int(input('Go back to input email \n'))
 			no_record_for_account_number(option)
 
+#Options after incorrect password/password help
 def else_options_invalid_password():
 
 				print('Forgotten password? press 1')
@@ -255,20 +276,20 @@ def else_options_invalid_password():
 
 
 
-
+#Function for login
 def login():
 
 
 	print()
-	print("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
+	print("|"*20)
 	global account_number
 	account_number=input("What is your account number? (Unsure what to type?, press 1, for help) \n")
 	for account_numbers in User_password_database:
 		if account_numbers==account_number:
 			account_number=account_numbers
-			password=input("What is your password? \n")
+			password=input("What is your password? (Forgotten password?, press enter,Extra options would be displayed) \n")
 			if password == User_password_database[account_number][3]:
-				print('==================================')
+				print('='*20)
 				print('Date: ', date_formatted)
 				print('Time: ', time_formatted)
 				print('Welcome', User_password_database[account_number][1])
@@ -295,7 +316,8 @@ def login():
 	#options_account_number()
 
 
-
+#Function that presents option for bank
+#operation
 def bank_operation():
 	
 	
@@ -323,20 +345,20 @@ def bank_operation():
 	else:
 		print('Invalid option')
 
-
+#Function that is called after esch bank operation
 def next_step_after_operation():
 	print('Perform another operation or exit')
 	bank_operation()
 
 
 
-
+#Function called when user wants to make a complaint
 def complaint():
 	input('What issue will you like to report? ')
 	print('Thank you for contacting us' )
 	next_step_after_operation()
 
-
+#Function called when user wants to make a withdrawal
 def withdrawal():
 	amount_withdrawn=int(input('How much would you like to withdraw: '))
 	if amount_withdrawn <= User_password_database[account_number][4]:
@@ -346,19 +368,21 @@ def withdrawal():
 		print('Insufficient funds')
 	
 	next_step_after_operation()
-
+#Function called when user wants to make a cash deposit
 def cash_deposit():
 	amount_deposited=int(input('How much would you like to deposit? '))
 	User_password_database[account_number][4]=User_password_database[account_number][4]+amount_deposited
 	print('You deposited ₦{}'.format(amount_deposited))
 	next_step_after_operation()
 
+#Function called when user wants to make a check balance
 def check_balance():
 	print('Dear ', User_password_database[account_number][0],  User_password_database[account_number][1])
 	print('You have a balance of ₦',  User_password_database[account_number][4])
 	next_step_after_operation()
 
 
+#Calling the  init function
 init()
            
         
