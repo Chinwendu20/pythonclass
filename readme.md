@@ -44,6 +44,10 @@ Install python on the system
 
     python .\ATM_mockup.py    
 
+## Exceptions
+
+You might encounter a unicode error if ran on git bash brcause of the '₦' sign
+
 ## Functionalities
 
  - Registration of account
