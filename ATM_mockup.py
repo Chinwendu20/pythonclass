@@ -207,19 +207,23 @@ def input_email(message):
 		for accounts in User_password_database:
 			if email in User_password_database[accounts]:
 								
-				print(message)
-			else:
-				print('We do not have this record')
-				incorrect_email()					
+				the_message=message
+				break
+		if the_message:
+			print(message)
+		else:
+			print('We do not have this record')
+			incorrect_email()
+					
 
 	
 #Logic for function after incorrect password/password help
 #Using selected option from 'else_options_invalid_password' function
 def incorrect_password(option):
 	if option == 1:
-		global message1
-		message1='An email has been sent to you'
-		input_email(message1)
+		global message
+		message='An email has been sent to you'
+		input_email(message)
 
 
 	elif option == 2:
@@ -261,7 +265,7 @@ def options_account_number():
 			print('Forgot account number? to retrieve, press 1')
 			print('Register, to get an account number, press 2')
 			print('To exit, press 3')
-			option=int(input('Go back to input email \n'))
+			option=int(input('Go back to input email, press 4 \n'))
 			no_record_for_account_number(option)
 
 #Options after incorrect password/password help
@@ -305,6 +309,7 @@ def login():
 				trial =trial-1
 				if trial >= 0:
 					else_options_invalid_password()
+					exit_func()
 				else:
 					print ('You have exceeded your limit for this session')
 					exit_func()
@@ -312,8 +317,8 @@ def login():
 			options_account_number()
 			exit_func()
 			
-	#print('We do not have this record')
-	#options_account_number()
+	print('We do not have this record')
+	options_account_number()
 
 
 #Function that presents option for bank
